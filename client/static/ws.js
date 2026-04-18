@@ -30,31 +30,59 @@ export class WS {
                 action: 'answer',
                 option
             }));
-            this.ui.setStatus('Resposta enviada. Aguardando o outro jogador...');
+
+            // 🎮 feedback imediato estilo Kahoot
+            this.ui.setStatus('✅ Resposta enviada! Aguardando o outro jogador...');
             this.ui.disableOptions();
         }
     }
 
     handleMessage(data) {
+
+        // 🔰 INICIALIZAÇÃO
         if (data.type === 'init') {
             this.playerName = data.player;
-            this.ui.setStatus(`Você é o ${data.player}`);
-        } else if (data.type === 'wait') {
-            this.ui.setStatus(data.message);
-        } else if (data.type === 'question') {
-            this.ui.setStatus(`Quiz em andamento - ${this.playerName ?? 'Jogador'}`);
+            this.ui.setStatus(`🎮 Você é o ${data.player}`);
+        }
+
+        // ⏳ ESPERA
+        else if (data.type === 'wait') {
+            this.ui.setStatus(`⏳ ${data.message}`);
+        }
+
+        // ❓ NOVA PERGUNTA
+        else if (data.type === 'question') {
+            this.ui.setStatus(`🔥 Pergunta ativa - ${this.playerName ?? 'Jogador'}`);
+
             this.ui.renderQuestion(data.state, (optionIndex) => {
                 this.sendAnswer(optionIndex);
             });
-        } else if (data.type === 'round_result') {
+        }
+
+        // 🎯 RESULTADO
+        else if (data.type === 'round_result') {
             this.ui.updateScoreboard(data.scores);
+
+            // Mostra resultado 
             this.ui.showRoundResult(data.correct_option);
-            this.ui.disableOptions();
-            this.ui.setStatus('Todos responderam. A resposta correta foi destacada em verde.');
-        } else if (data.type === 'finished') {
+
+            this.ui.setStatus('🎯 Resposta revelada!');
+        }
+
+        //FIM
+        else if (data.type === 'finished') {
             this.ui.showFinished(data.state);
-        } else if (data.type === 'full') {
-            this.ui.setStatus(data.message);
+
+            // Fechar conexão depois de 10s
+            setTimeout(() => {
+                if (this.socket) {
+                    this.socket.close();
+                }
+            }, 10000);
+        }
+
+        else if (data.type === 'full') {
+            this.ui.setStatus(`❌ ${data.message}`);
         }
     }
 }

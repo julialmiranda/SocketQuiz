@@ -1,4 +1,5 @@
 import json
+import asyncio
 import tornado.web
 import tornado.websocket
 from server.manager import RoomManager
@@ -18,7 +19,7 @@ class CreateRoomHandler(tornado.web.RequestHandler):
 
 
 class GameWebSocketHandler(tornado.websocket.WebSocketHandler):
-    connections = {}  # sala -> lista de conexões
+    connections = {}  # sala -> conexões
 
     def initialize(self, room_manager: RoomManager) -> None:
         self.room_manager = room_manager
@@ -82,10 +83,15 @@ class GameWebSocketHandler(tornado.websocket.WebSocketHandler):
                         round_result = room.finish_round()
                         self.broadcast_round_result(round_result)
 
-                        if room.state.game_over:
-                            self.broadcast_finished(room)
-                        else:
-                            self.broadcast_question(room)
+                        async def next_step():
+                            await asyncio.sleep(5)
+
+                            if room.state.game_over:
+                                self.broadcast_finished(room)
+                            else:
+                                self.broadcast_question(room)
+
+                        asyncio.create_task(next_step())
 
         except Exception as e:
             logger.error(f"Erro no WebSocket: {e}")
