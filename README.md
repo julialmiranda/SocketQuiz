@@ -1,46 +1,65 @@
 🧠 Quiz Multiplayer em Tempo Real com WebSockets
 
-Este projeto consiste em um sistema de quiz multiplayer desenvolvido com foco em comunicação em tempo real utilizando WebSockets. A aplicação permite que dois jogadores se conectem a uma mesma sala e participem de uma disputa baseada em perguntas sobre Python.
+Sistema de quiz multiplayer desenvolvido com foco em **comunicação em tempo real**, permitindo que dois jogadores participem de uma disputa interativa baseada em perguntas sobre Python.
 
-O principal objetivo do projeto é demonstrar, na prática, como conceitos fundamentais de sistemas distribuídos e comunicação assíncrona podem ser aplicados em um cenário interativo e dinâmico.
+🎯 Objetivo
 
-🚀 Funcionalidades
-🎮 Partidas multiplayer em tempo real (2 jogadores)
-🔗 Criação de salas privadas via link compartilhável
-❓ Perguntas fixas sobre Python
-⚡ Envio simultâneo de respostas
-📊 Atualização automática de placar
-✅ Destaque da resposta correta após cada rodada
-⏱️ Sincronização entre clientes utilizando WebSockets
-🧩 Interface moderna e responsiva
-🏗️ Tecnologias Utilizadas
-Python (backend)
-Tornado (servidor WebSocket)
-JavaScript (ES6 Modules) (frontend)
-HTML + Tailwind CSS (interface)
-WebSockets (comunicação em tempo real)
+Demonstrar na prática como conceitos de **Sistemas Distribuídos** e **comunicação assíncrona** podem ser aplicados em um sistema interativo.
 
-🧠 Conceitos Aplicados
-Este projeto explora diversos conceitos importantes da computação:
+⚙️ Funcionalidades
 
-Comunicação bidirecional com WebSockets
-Gerenciamento de estado no servidor
-Sincronização entre múltiplos clientes
-Arquitetura cliente-servidor
-Programação assíncrona
-Separação de responsabilidades (backend vs frontend)
+- 🎮 Partidas multiplayer em tempo real (2 jogadores)
+- 🔗 Criação de salas via link compartilhável
+- ❓ Perguntas fixas sobre Python
+- ⚡ Envio simultâneo de respostas
+- 🧠 Feedback visual (resposta correta e incorreta)
+- ⏱️ Timer por pergunta
+- 📊 Atualização automática do placar
+- 🔄 Sincronização em tempo real com WebSockets
+- 🎨 Interface moderna e responsiva
 
-🎯 Objetivo Acadêmico
-O sistema foi desenvolvido como parte de um trabalho acadêmico com o objetivo de analisar, na prática, como aplicações interativas em tempo real dependem diretamente do desempenho e da organização do sistema operacional e da comunicação entre processos.
 
-🏆 Como funciona
-Um jogador cria uma sala
-Um link é gerado para compartilhamento
-O segundo jogador entra pela URL
-O quiz inicia automaticamente
-Ambos respondem as perguntas
-O sistema avalia e atualiza o placar em tempo real
-Ao final, o vencedor é exibido
+🛠️ Tecnologias Utilizadas
+
+**Backend**
+- Python
+- Tornado (WebSocket server)
+
+**Frontend**
+- JavaScript (ES6 Modules)
+- HTML
+- Tailwind CSS
+
+**Comunicação**
+- WebSockets
+
+
+🧩 Conceitos Aplicados
+
+- Comunicação bidirecional (WebSockets)
+- Gerenciamento de estado no servidor
+- Sincronização entre múltiplos clientes
+- Arquitetura cliente-servidor
+- Programação assíncrona
+- Separação de responsabilidades (backend vs frontend)
+
+
+🎮 Como funciona
+
+1. Um jogador cria uma sala
+2. Um link é gerado automaticamente
+3. O segundo jogador entra pela URL
+4. O quiz inicia automaticamente
+5. Ambos respondem as perguntas
+6. O sistema avalia e atualiza o placar em tempo real
+7. Ao final, o vencedor é exibido
+
+
+🎓 Objetivo Acadêmico
+
+Projeto desenvolvido com fins acadêmicos para demonstrar como aplicações em tempo real dependem diretamente do **desempenho do sistema operacional**, da **gestão de processos** e da **comunicação entre clientes e servidor**.
+
 
 🔥 Diferencial
-Diferente de aplicações tradicionais, este sistema utiliza WebSockets para garantir comunicação contínua e instantânea entre cliente e servidor, proporcionando uma experiência fluida e sincronizada entre os jogadores.
+
+Diferente de aplicações tradicionais, este sistema utiliza **WebSockets** para manter uma comunicação contínua e instantânea, proporcionando uma experiência fluida e sincronizada entre os jogadores.
