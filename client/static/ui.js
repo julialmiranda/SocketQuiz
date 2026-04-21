@@ -29,8 +29,14 @@ export class UI {
 
     updateScoreboard(scores) {
         this.scoreboard.innerHTML = `
-            <div>Jogador 1: ${scores["Jogador 1"] ?? 0}</div>
-            <div>Jogador 2: ${scores["Jogador 2"] ?? 0}</div>
+            <div class="flex items-center justify-between bg-blue-900/50 rounded-xl px-2 py-1 border border-blue-500/40">
+                <span class="text-xs text-blue-100 font-semibold">👤 Jogador 1</span>
+                <span class="text-lg font-bold text-blue-400">${scores["Jogador 1"] ?? 0}</span>
+            </div>
+            <div class="flex items-center justify-between bg-red-900/50 rounded-xl px-2 py-1 border border-red-500/40">
+                <span class="text-xs text-red-100 font-semibold">👤 Jogador 2</span>
+                <span class="text-lg font-bold text-red-400">${scores["Jogador 2"] ?? 0}</span>
+            </div>
         `;
     }
 
@@ -45,7 +51,7 @@ export class UI {
         if (!question) return;
 
         this.questionMeta.textContent =
-            `Pergunta ${state.current_question_index + 1} de ${state.total_questions}`;
+            `Rodada ${state.current_question_index + 1}`;
 
         this.questionText.textContent = question.text;
         this.options.innerHTML = '';
@@ -147,14 +153,22 @@ export class UI {
         this.updateScoreboard(state.scores);
         this.disableOptions();
 
+        // Remove classes anteriores
+        this.status.classList.remove('winner-azul', 'winner-vermelho', 'empate');
+
         if (state.winner === "Empate") {
             this.setStatus("🏁 Empate!");
-        } else {
+            this.status.classList.add('empate');
+        } else if (state.winner === "Jogador 1") {
             this.setStatus(`🏆 Vencedor: ${state.winner}`);
+            this.status.classList.add('winner-azul');
+        } else if (state.winner === "Jogador 2") {
+            this.setStatus(`🏆 Vencedor: ${state.winner}`);
+            this.status.classList.add('winner-vermelho');
         }
 
         this.questionText.textContent = "Fim do quiz!";
         this.options.innerHTML = '';
-        this.questionMeta.textContent = `Total de perguntas: ${state.total_questions}`;
+        this.questionMeta.textContent = `Total: ${state.total_questions}`;
     }
 }

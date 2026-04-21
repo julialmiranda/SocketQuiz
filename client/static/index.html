@@ -51,6 +51,25 @@
             transform: scale(1.03);
             filter: brightness(1.1);
         }
+
+        /* Status com cores de vencedor */
+        #status.winner-azul {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.7), rgba(12, 74, 110, 0.7));
+            border-color: rgba(96, 165, 250, 0.6);
+            color: #7dd3fc;
+        }
+
+        #status.winner-vermelho {
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.7), rgba(110, 7, 47, 0.7));
+            border-color: rgba(248, 113, 113, 0.6);
+            color: #fca5a5;
+        }
+
+        #status.empate {
+            background: linear-gradient(135deg, rgba(51, 65, 85, 0.7), rgba(30, 41, 59, 0.7));
+            border-color: rgba(148, 163, 184, 0.6);
+            color: #cbd5e1;
+        }
     </style>
 
 </head>
@@ -58,10 +77,10 @@
 
 <body class="min-h-screen flex items-center justify-center px-4 py-10 text-slate-100">
 
-<div class="quiz-card max-w-3xl w-full rounded-3xl border border-slate-700/60 p-8 shadow-[0_30px_80px_rgba(15,23,42,0.45)]">
+<div class="quiz-card max-w-3xl w-full rounded-3xl border border-slate-700/60 p-5 shadow-[0_30px_80px_rgba(15,23,42,0.45)]">
 
     <!-- HEADER -->
-    <div class="flex items-center justify-between gap-4 mb-6">
+    <div class="flex items-center justify-between gap-4 mb-4">
         <div>
             <h1 class="text-3xl font-bold tracking-tight">Quiz Multiplayer</h1>
             <p class="text-sm text-slate-400 mt-1">Vamos testar seu conhecimento em Python?</p>
@@ -74,38 +93,42 @@
 
     <!-- STATUS -->
     <div id="status"
-        class="mb-3 rounded-2xl border border-slate-700/70 bg-slate-900/80 px-4 py-3 text-center text-lg font-semibold shadow-inner">
+        class="mb-3 rounded-2xl border border-slate-700/70 bg-slate-900/80 px-4 py-2 text-center text-base font-semibold shadow-inner transition-all duration-300">
         Crie uma sala para iniciar o quiz
     </div>
 
     <!-- TIMER BAR -->
-    <div class="w-full bg-slate-800 rounded-full h-3 mb-6 overflow-hidden">
+    <div class="w-full bg-slate-800 rounded-full h-3 mb-4 overflow-hidden">
         <div id="timerBar"
             class="bg-indigo-500 h-3 rounded-full transition-all duration-1000"
             style="width: 100%">
         </div>
     </div>
 
+    <!-- RODADA COUNTER -->
+    <div id="questionMeta" class="mb-3 text-right text-sm font-bold text-yellow-400 tracking-wide">Rodada 0</div>
+
     <!-- INFO -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div class="grid grid-cols-1 mb-4">
 
-        <div class="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-4">
-            <h2 class="text-xs uppercase tracking-wider text-slate-400 mb-3">Rodada</h2>
-            <div id="questionMeta" class="text-sm text-slate-300">Aguardando início...</div>
-        </div>
-
-        <div class="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-4">
-            <h2 class="text-xs uppercase tracking-wider text-slate-400 mb-3">Placar</h2>
-            <div id="scoreboard" class="text-sm text-slate-300 space-y-2">
-                <div>Jogador 1: 0</div>
-                <div>Jogador 2: 0</div>
+        <div class="rounded-2xl border border-purple-500/50 bg-gradient-to-br from-purple-900/40 to-slate-900/60 p-4">
+            <h2 class="text-xs uppercase tracking-wider text-purple-300 font-bold mb-3">🏆 Placar</h2>
+            <div id="scoreboard" class="grid grid-cols-2 gap-2">
+                <div class="flex items-center justify-between bg-blue-900/50 rounded-xl px-2 py-1 border border-blue-500/40">
+                    <span class="text-xs text-blue-100 font-semibold">👤 Jogador 1</span>
+                    <span class="text-lg font-bold text-blue-400">0</span>
+                </div>
+                <div class="flex items-center justify-between bg-red-900/50 rounded-xl px-2 py-1 border border-red-500/40">
+                    <span class="text-xs text-red-100 font-semibold">👤 Jogador 2</span>
+                    <span class="text-lg font-bold text-red-400">0</span>
+                </div>
             </div>
         </div>
 
     </div>
 
     <!-- QUIZ -->
-    <div id="quizArea" class="mb-6 hidden">
+    <div id="quizArea" class="mb-4 hidden">
 
         <!-- PERGUNTA -->
         <div class="rounded-2xl border border-slate-700/70 bg-slate-900/80 p-6 mb-5 text-center">
